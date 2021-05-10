@@ -5,7 +5,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 import java.io.IOException;
+import java.net.ResponseCache;
 import java.sql.*;
 
 @WebServlet(
@@ -22,7 +24,10 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
+    }
+
+    private void forward(HttpServletRequest request, HttpServletResponse response) {
     }
 
     @Override
@@ -44,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
             pstmt.setString(5,Date);
             pstmt.executeUpdate();
 
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("login");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
